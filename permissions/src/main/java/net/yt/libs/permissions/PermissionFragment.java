@@ -1,4 +1,4 @@
-package com.shon.permissions;
+package net.yt.libs.permissions;
 
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;

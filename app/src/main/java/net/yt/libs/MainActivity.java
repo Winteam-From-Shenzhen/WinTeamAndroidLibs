@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.os.Bundle;
 
-import com.shon.permissions.OnPermissionCallback;
-import com.shon.permissions.PermissionCheck;
-import com.shon.permissions.PermissionRequest;
+import net.yt.libs.permissions.OnPermissionCallback;
+import net.yt.libs.permissions.PermissionCheck;
+import net.yt.libs.permissions.PermissionRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        PermissionCheck.hasPerMissions(this, new String[]{}, new OnPermissionCallback() {
-            @Override
-            public void onRequest(boolean granted, @Nullable String[] reRequest) {
-
-
-            }
-        });
+//        PermissionCheck.hasPerMissions(this, new String[]{}, new OnPermissionCallback() {
+//            @Override
+//            public void onRequest(boolean granted, @Nullable String[] reRequest) {
+//
+//
+//            }
+//        });
         PermissionRequest permissionRequest = new PermissionRequest.Builder(this)
                 .addPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .setCallback(new OnPermissionCallback() {

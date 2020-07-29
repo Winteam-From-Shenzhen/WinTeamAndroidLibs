@@ -1,4 +1,4 @@
-package com.shon.permissions;
+package net.yt.libs.permissions;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
