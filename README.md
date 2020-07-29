@@ -1,0 +1,2 @@
+# WinTeamAndroidLibs
+libs
