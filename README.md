@@ -5,6 +5,9 @@
 ### 1、permissions
  权限申请工具
 
+ [![](https://jitpack.io/v/Winteam-From-Shenzhen/WinTeamAndroidLibs.svg)](https://jitpack.io/#Winteam-From-Shenzhen/WinTeamAndroidLibs)
+
+
  **使用方式**
 
 

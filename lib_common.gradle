@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.winteam'
+group='com.github.Winteam-From-Shenzhen'
 
 android {
     compileSdkVersion 29
