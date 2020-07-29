@@ -26,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
         if (canReadStorage) {
             return;
         }
+
+
+        PermissionCheck.hasPerMissions(this, new String[]{}, new OnPermissionCallback() {
+            @Override
+            public void onRequest(boolean granted, @Nullable String[] reRequest) {
+
+
+            }
+        });
         PermissionRequest permissionRequest = new PermissionRequest.Builder(this)
                 .addPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .setCallback(new OnPermissionCallback() {
