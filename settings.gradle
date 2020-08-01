@@ -1,3 +1,4 @@
+include ':net'
 include ':permissions'
 include ':app'
 rootProject.name = "WinTeamAndroidLibs"

@@ -1,0 +1,12 @@
+apply  from: "../lib_common.gradle"
+
+android {
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.7.2'
+    api 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+}
