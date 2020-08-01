@@ -32,5 +32,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.github.Winteam-From-Shenzhen:WinTeamAndroidLibs:0.0.1'
+    //全部依赖
+    implementation 'com.github.Winteam-From-Shenzhen:WinTeamAndroidLibs:0.0.2'
+
+    //单独依赖
+    implementation 'com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:permissions:0.0.2'
+    implementation 'com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:net:0.0.2'
 }

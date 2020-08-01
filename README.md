@@ -5,10 +5,30 @@
 ### 1、permissions
  权限申请工具
 
- [![](https://jitpack.io/v/Winteam-From-Shenzhen/WinTeamAndroidLibs.svg)](https://jitpack.io/#Winteam-From-Shenzhen/WinTeamAndroidLibs)
+ [![jitpack.io](https://jitpack.io/v/Winteam-From-Shenzhen/WinTeamAndroidLibs.svg)](https://jitpack.io/#Winteam-From-Shenzhen/WinTeamAndroidLibs)
+
+**1、添加依赖**
+1、 根目录 build.gradle
+
+    allprojects {
+        repositories {
+            ...
+            maven { url "https://jitpack.io" }
+        }
+    }
+
+2、app 目录下 build.gradle
+
+    两种方式：
+    //全部依赖
+    implementation 'com.github.Winteam-From-Shenzhen:WinTeamAndroidLibs:0.0.2'
+
+    //单独依赖
+    implementation 'com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:permissions:0.0.2'
+    implementation 'com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:net:0.0.2'
 
 
- **使用方式**
+ **2、使用方式**
 
 
         // 1、检查是否已获取某一权限    

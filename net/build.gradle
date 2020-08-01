@@ -1,8 +1,5 @@
 apply  from: "../lib_common.gradle"
 
-android {
-}
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
