@@ -1,0 +1,7 @@
+apply  from: "../lib_common.gradle"
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+
+}

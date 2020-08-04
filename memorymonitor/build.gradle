@@ -1,0 +1,14 @@
+apply  from: "../lib_common.gradle"
+
+
+android {
+
+    android {
+        resourcePrefix "${project.name}_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+}

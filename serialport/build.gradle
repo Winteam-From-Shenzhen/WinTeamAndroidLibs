@@ -1,0 +1,27 @@
+apply from: "../lib_common.gradle"
+
+android {
+    defaultConfig {
+
+        ndk {
+            abiFilters "armeabi-v7a","arm64-v8a" //输出指定cpu体系结构下的so库。
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

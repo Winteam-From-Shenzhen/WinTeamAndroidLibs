@@ -1,0 +1,11 @@
+apply  from: "../lib_common.gradle"
+
+android {
+
+    useLibrary'org.apache.http.legacy'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+}

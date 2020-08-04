@@ -1,3 +1,7 @@
+include ':serialport'
+include ':ota'
+include ':memorymonitor'
+include ':log'
 include ':net'
 include ':permissions'
 include ':app'

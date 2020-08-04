@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="memorymonitor_CurveChartView">
+        <attr format="integer" name="memorymonitor_ccv_XTextPadding"/>
+        <attr format="integer" name="memorymonitor_ccv_YTextPadding"/>
+        <attr format="float" name="memorymonitor_ccv_MaxValueMulti"/>
+        <attr format="float" name="memorymonitor_ccv_MinValueMulti"/>
+        <attr format="integer" name="memorymonitor_ccv_YPartCount"/>
+        <attr format="integer" name="memorymonitor_ccv_DataSize"/>
+        <attr format="string" name="memorymonitor_ccv_YFormat"/>
+        <attr format="color" name="memorymonitor_ccv_XYColor"/>
+        <attr format="float" name="memorymonitor_ccv_XYStrokeWidth"/>
+        <attr format="color" name="memorymonitor_ccv_LineColor"/>
+        <attr format="float" name="memorymonitor_ccv_LineStrokeWidth"/>
+        <attr format="color" name="memorymonitor_ccv_FillColor"/>
+        <attr format="color" name="memorymonitor_ccv_YLabelColor"/>
+        <attr format="float" name="memorymonitor_ccv_YLabelSize"/>
+        <attr format="color" name="memorymonitor_ccv_GraduatedLineColor"/>
+        <attr format="float" name="memorymonitor_ccv_GraduatedLineStrokeWidth"/>
+    </declare-styleable>
+</resources>
