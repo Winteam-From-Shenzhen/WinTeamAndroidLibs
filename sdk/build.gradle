@@ -1,0 +1,7 @@
+apply  from: "../lib_common.gradle"
+
+dependencies {
+    implementation project(path: ':log')
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+}

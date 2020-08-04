@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="net.yt.lib.sdk">
+
+    <application >
+        <service
+            android:name=".work.WorkService"
+            android:enabled="true"
+            android:exported="true" />
+    </application>
+
+</manifest>

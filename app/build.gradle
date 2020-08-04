@@ -32,6 +32,7 @@ dependencies {
     implementation project(path: ':ota')
     implementation project(path: ':permissions')
     implementation project(path: ':serialport')
+    implementation project(path: ':sdk')
 //    implementation project(path: ':permissions')
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
