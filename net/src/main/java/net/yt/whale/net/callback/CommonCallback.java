@@ -38,7 +38,7 @@ public abstract class CommonCallback<T> implements Callback<T> {
             }
 
         } catch (Exception e) {
-            runOnMain(() -> onError(-1, ""));
+            runOnMain(() -> onError(-1, "数据错误"));
         }
 
     }

@@ -72,7 +72,7 @@ public class ExceptionHandle {
                 || e instanceof JSONException
                 || e instanceof ParseException) {
             ex = new ResponeThrowable(e, ERROR.PARSE_ERROR);
-            ex.message = "解析错误";
+            ex.message = "解析错误 : LocalizedMessage = " + e.getLocalizedMessage() + "\r" + "Message = " + e.getMessage();
             return ex;
         } else if (e instanceof ConnectException) {
             ex = new ResponeThrowable(e, ERROR.NETWORD_ERROR);
