@@ -2,6 +2,8 @@ package net.yt.whale.net;
 
 import android.text.TextUtils;
 
+import net.yt.whale.net.util.RetrofitLog;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -55,6 +57,7 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
 
         if (!TextUtils.equals(cacheToken, token)) {
             //token有更新
+            RetrofitLog.d("用户 token 有更新");
             cacheToken = token;
             OkHttpClientBuild.updateTokenAddInterceptor(token);
         }

@@ -8,9 +8,9 @@ package net.yt.whale.net;
  */
 public final class Config {
 
-    private static int CONNECT_TIME = 5; //连接超时
-    private static int READ_TIME = 5; //读取超时
-    private static int WRITE_TIME = 5; //写入超时
+    private static int CONNECT_TIME = 10; //连接超时
+    private static int READ_TIME = 10; //读取超时
+    private static int WRITE_TIME = 10; //写入超时
 
     private static boolean isDebug = true; //是否开启调试信息
 
@@ -34,9 +34,9 @@ public final class Config {
     }
 
     public final class ConfigSetting {
-        private int connectTimeout = 5;
-        private int readTimeout = 5;
-        private int writeTimeout = 5;
+        private int connectTimeout = 10;
+        private int readTimeout = 10;
+        private int writeTimeout = 10;
 
         private boolean isDebug = true;
 
