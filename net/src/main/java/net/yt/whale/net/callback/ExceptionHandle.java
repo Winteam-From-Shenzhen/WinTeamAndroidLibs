@@ -33,6 +33,8 @@ public class ExceptionHandle {
             case FORBIDDEN:
             case NOT_FOUND:
             case REQUEST_TIMEOUT:
+                ex.message = "请求超时";
+                break;
             case GATEWAY_TIMEOUT:
             case INTERNAL_SERVER_ERROR:
             case BAD_GATEWAY:
@@ -54,6 +56,8 @@ public class ExceptionHandle {
                 case FORBIDDEN:
                 case NOT_FOUND:
                 case REQUEST_TIMEOUT:
+                    ex.message = "请求超时";
+                    break;
                 case GATEWAY_TIMEOUT:
                 case INTERNAL_SERVER_ERROR:
                 case BAD_GATEWAY:

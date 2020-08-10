@@ -18,7 +18,7 @@ import okhttp3.Response;
  * Des : 给 请求添加 token 的拦截器
  */
 public class TokenAddInterceptor implements Interceptor {
-
+    private String tokenKey = "token";
     private String mToken;
 
     public TokenAddInterceptor(String token) {
@@ -26,7 +26,21 @@ public class TokenAddInterceptor implements Interceptor {
     }
 
     public void updateToken(String newToken) {
-        mToken = newToken;
+        updateToken("", newToken);
+    }
+
+    /**
+     * 2020/8/10  新增
+     * 更新 token key
+     *
+     * @param key    key
+     * @param mToken mToken
+     */
+    public void updateToken(String key, String mToken) {
+        if (!TextUtils.isEmpty(key)) {
+            tokenKey = key;
+        }
+        this.mToken = mToken;
     }
 
     @NotNull
@@ -35,9 +49,9 @@ public class TokenAddInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
 
         String token = mToken;
-        String tokenKey = "token";
+        String key = tokenKey;
 
-        builder.addHeader(tokenKey, TextUtils.isEmpty(token) ? "" : token); //增加token
+        builder.addHeader(key, TextUtils.isEmpty(token) ? "" : token); //增加token
         Request request = builder.build();
 
         return chain.proceed(request);

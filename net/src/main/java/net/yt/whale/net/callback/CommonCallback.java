@@ -1,5 +1,6 @@
 package net.yt.whale.net.callback;
 
+import net.yt.whale.net.BaseResult;
 import net.yt.whale.net.util.NetExecutors;
 import net.yt.whale.net.util.RetrofitLog;
 
@@ -16,8 +17,8 @@ import retrofit2.Response;
  * Des : 基本的请求 callback
  */
 public abstract class CommonCallback<T> implements Callback<T> {
-    private String TAG = CommonCallback.class.getSimpleName();
 
+    @SuppressWarnings("unChecked")
     @Override
     public void onResponse(@NotNull Call<T> call, final @NotNull Response<T> response) {
         try {
@@ -31,14 +32,27 @@ public abstract class CommonCallback<T> implements Callback<T> {
                     return;
                 }
                 RetrofitLog.d("onResponse : result = " + response.body());
-                runOnMain(() -> onSuccess(result));
+
+                if (response.body() instanceof BaseResult) {
+
+                    BaseResult baseResult = (BaseResult) response.body();
+                    RetrofitLog.d("onResponse : result = " + baseResult.toString());
+                    if (baseResult.getCode() == 0 || baseResult.getCode() == 200){
+                        runOnMain(() -> onSuccess(result));
+                    }else {
+                        runOnMain(() -> onError(baseResult.getCode(), baseResult.getMsg()));
+                    }
+                } else {
+                    runOnMain(() -> onSuccess(result));
+                }
+
             } else {
                 ExceptionHandle.ResponeThrowable responeThrowable = ExceptionHandle.handleException(response.code());
                 runOnMain(() -> onError(responeThrowable.code, responeThrowable.message));
             }
 
         } catch (Exception e) {
-            runOnMain(() -> onError(-1, "数据错误"));
+            runOnMain(() -> onError(-1, "服务器返回数据异常"));
         }
 
     }

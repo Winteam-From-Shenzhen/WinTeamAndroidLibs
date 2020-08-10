@@ -30,11 +30,11 @@ import retrofit2.Retrofit;
  * Date : 2020/7/21 14:24
  * Package name : net.yt.whale.net
  * Des : 下载 请求, 最终类，不允许被继承和复写
- *  重要说明：
- *  一个下载任务，对应一个 DownLoadRequest
- *  多个下载任务，对应多个 DownLoadRequest
- *
- *  目标，统一管理下载任务
+ * 重要说明：
+ * 一个下载任务，对应一个 DownLoadRequest
+ * 多个下载任务，对应多个 DownLoadRequest
+ * <p>
+ * 目标，统一管理下载任务
  * <p>
  * 本类使用方式：
  * DownLoadRequest downLoadRequest = new DownLoadRequest(fileUrl);
@@ -45,7 +45,7 @@ import retrofit2.Retrofit;
  * <p>
  * 此外， 回调是主线程执行
  */
-public final class DownLoadRequest extends BaseApi<DownLoadApi> {
+public class DownLoadRequest extends BaseApi<DownLoadApi> {
 
     private int progress = -1;
     private String currentBaseUrl;
@@ -60,7 +60,7 @@ public final class DownLoadRequest extends BaseApi<DownLoadApi> {
      * @param downLoadUrl 下载全地址
      */
     public DownLoadRequest(String downLoadUrl) {
-        this("",downLoadUrl);
+        this("", downLoadUrl);
     }
 
     public DownLoadRequest(String token, String downLoadUrl) {
@@ -161,7 +161,7 @@ public final class DownLoadRequest extends BaseApi<DownLoadApi> {
      * @param targetFile       targetFile
      * @param downLoadCallback downLoadCallback
      */
-    private void onHttpResponse( Response<ResponseBody> response,
+    private void onHttpResponse(Response<ResponseBody> response,
                                 final String targetFile, @NonNull final DownLoadCallback downLoadCallback) {
         RetrofitLog.e("response : " + response.toString());
         if (!response.isSuccessful()) {
@@ -264,5 +264,6 @@ public final class DownLoadRequest extends BaseApi<DownLoadApi> {
         return null;
     }
 
-
+    @Override
+    public String getTokenKey() { return null; }
 }

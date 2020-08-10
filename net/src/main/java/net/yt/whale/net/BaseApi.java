@@ -59,7 +59,7 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
             //token有更新
             RetrofitLog.d("用户 token 有更新");
             cacheToken = token;
-            OkHttpClientBuild.updateTokenAddInterceptor(token);
+            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(),token);
         }
         if (mRetrofit == null) {
             mRetrofit = retrofitBuilder.build();
@@ -99,6 +99,11 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
         }
         Type[] types = ((ParameterizedType) genType).getActualTypeArguments();
         return (Class<ApiImp>) types[0];
+    }
+
+    @Override
+    public String getToken() {
+        return "";
     }
 
     @Override

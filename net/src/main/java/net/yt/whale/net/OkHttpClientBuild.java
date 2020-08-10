@@ -33,12 +33,11 @@ class OkHttpClientBuild {
      * @param token token
      * @return TokenAddInterceptor
      */
-    private static TokenAddInterceptor getTokenInterceptor(String token) {
+    private static TokenAddInterceptor getTokenInterceptor(String key, String token) {
         if (tokenAddInterceptor == null) {
             tokenAddInterceptor = new TokenAddInterceptor(token);
-        } else {
-            tokenAddInterceptor.updateToken(token);
         }
+        tokenAddInterceptor.updateToken(key, token);
         return tokenAddInterceptor;
     }
 
@@ -47,8 +46,8 @@ class OkHttpClientBuild {
      *
      * @param token token
      */
-    public static void updateTokenAddInterceptor(String token) {
-        getTokenInterceptor(token);
+    public static void updateTokenAddInterceptor(String key, String token) {
+        getTokenInterceptor(key,token);
     }
 
 
@@ -60,7 +59,7 @@ class OkHttpClientBuild {
      */
     public static OkHttpClient build(String token, ITokenHandler tokenHandler) {
         OkHttpClient.Builder builder = getDefaultBuild();
-        builder.addInterceptor(getTokenInterceptor(token));         //设置 Token拦截器, 添加 token 使用
+        builder.addInterceptor(getTokenInterceptor("",token));         //设置 Token拦截器, 添加 token 使用
         builder.addInterceptor(new TokenErrorInterceptor(tokenHandler)); //设置 返回 Token失效 拦截器
         return builder.build();
     }
