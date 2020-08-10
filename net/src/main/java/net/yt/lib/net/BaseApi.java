@@ -1,8 +1,8 @@
-package net.yt.whale.net;
+package net.yt.lib.net;
 
 import android.text.TextUtils;
 
-import net.yt.whale.net.util.RetrofitLog;
+import net.yt.lib.net.util.RetrofitLog;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -59,12 +59,12 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
             //token有更新
             RetrofitLog.d("用户 token 有更新");
             cacheToken = token;
-            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(),token);
+            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(), token);
         }
         if (mRetrofit == null) {
             mRetrofit = retrofitBuilder.build();
         }
-        if (apiInterface == null ) {
+        if (apiInterface == null) {
             //更新 apiInterface
             Class<ApiImp> apiImpClass = getApiImp(this);
             if (apiImpClass == null) {
@@ -103,6 +103,11 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
 
     @Override
     public String getToken() {
+        return "";
+    }
+
+    @Override
+    public String getTokenKey() {
         return "";
     }
 

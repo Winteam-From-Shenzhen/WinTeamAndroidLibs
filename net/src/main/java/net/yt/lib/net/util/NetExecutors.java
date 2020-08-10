@@ -1,4 +1,4 @@
-package net.yt.whale.net.util;
+package net.yt.lib.net.util;
 
 import android.os.Handler;
 import android.os.Looper;

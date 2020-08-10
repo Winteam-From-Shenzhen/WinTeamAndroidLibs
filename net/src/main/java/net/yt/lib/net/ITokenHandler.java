@@ -1,4 +1,4 @@
-package net.yt.whale.net;
+package net.yt.lib.net;
 
 /**
  * Auth : xiao.yunfei

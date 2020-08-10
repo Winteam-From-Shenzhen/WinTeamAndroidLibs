@@ -1,8 +1,8 @@
-package net.yt.whale.net.callback;
+package net.yt.lib.net.callback;
 
-import net.yt.whale.net.BaseResult;
-import net.yt.whale.net.util.NetExecutors;
-import net.yt.whale.net.util.RetrofitLog;
+import net.yt.lib.net.BaseResult;
+import net.yt.lib.net.util.NetExecutors;
+import net.yt.lib.net.util.RetrofitLog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,8 +47,8 @@ public abstract class CommonCallback<T> implements Callback<T> {
                 }
 
             } else {
-                ExceptionHandle.ResponeThrowable responeThrowable = ExceptionHandle.handleException(response.code());
-                runOnMain(() -> onError(responeThrowable.code, responeThrowable.message));
+//                ExceptionHandle.ResponeThrowable responeThrowable = ExceptionHandle.handleException(response.code());
+                runOnMain(() -> onError(response.code(), response.message()));
             }
 
         } catch (Exception e) {

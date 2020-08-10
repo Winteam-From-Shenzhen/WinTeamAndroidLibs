@@ -1,13 +1,13 @@
-package net.yt.whale.net;
+package net.yt.lib.net;
 
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import net.yt.whale.net.callback.DownLoadCallback;
-import net.yt.whale.net.interceptor.TokenAddInterceptor;
-import net.yt.whale.net.util.NetExecutors;
-import net.yt.whale.net.util.RetrofitLog;
+import net.yt.lib.net.callback.DownLoadCallback;
+import net.yt.lib.net.interceptor.TokenAddInterceptor;
+import net.yt.lib.net.util.NetExecutors;
+import net.yt.lib.net.util.RetrofitLog;
 
 import org.jetbrains.annotations.NotNull;
 

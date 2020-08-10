@@ -1,4 +1,4 @@
-package net.yt.whale.net.callback;
+package net.yt.lib.net.callback;
 
 /**
  * Auth : xiao.yunfei

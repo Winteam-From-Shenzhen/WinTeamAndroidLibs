@@ -1,4 +1,4 @@
-package net.yt.whale.net.callback;
+package net.yt.lib.net.callback;
 
 import com.google.gson.JsonParseException;
 
@@ -26,7 +26,7 @@ public class ExceptionHandle {
     private static final int SERVICE_UNAVAILABLE = 503;
     private static final int GATEWAY_TIMEOUT = 504;
 
-    public static ResponeThrowable handleException(int errorCode) {
+   /* public static ResponeThrowable handleException(int errorCode) {
         ResponeThrowable ex  = new ResponeThrowable(new Throwable(),errorCode);
         switch (errorCode){
             case UNAUTHORIZED:
@@ -44,7 +44,7 @@ public class ExceptionHandle {
                 break;
         }
         return ex;
-    }
+    }*/
 
     public static ResponeThrowable handleException(Throwable e) {
         ResponeThrowable ex;

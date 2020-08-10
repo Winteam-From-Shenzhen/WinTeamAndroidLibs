@@ -1,7 +1,7 @@
-package net.yt.whale.net.interceptor;
+package net.yt.lib.net.interceptor;
 
-import net.yt.whale.net.ITokenHandler;
-import net.yt.whale.net.util.RetrofitLog;
+import net.yt.lib.net.util.RetrofitLog;
+import net.yt.lib.net.ITokenHandler;
 
 import org.jetbrains.annotations.NotNull;
 

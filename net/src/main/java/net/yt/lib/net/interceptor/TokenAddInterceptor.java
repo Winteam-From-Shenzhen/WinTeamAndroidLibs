@@ -1,4 +1,4 @@
-package net.yt.whale.net.interceptor;
+package net.yt.lib.net.interceptor;
 
 
 import android.text.TextUtils;

@@ -1,4 +1,4 @@
-package net.yt.whale.net.util;
+package net.yt.lib.net.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

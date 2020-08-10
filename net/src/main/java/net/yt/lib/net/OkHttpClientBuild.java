@@ -1,10 +1,10 @@
-package net.yt.whale.net;
+package net.yt.lib.net;
 
-import net.yt.whale.net.interceptor.TokenErrorInterceptor;
-import net.yt.whale.net.interceptor.TokenAddInterceptor;
-import net.yt.whale.net.ssl.TrustAllCerts;
-import net.yt.whale.net.ssl.TrustAllHostnameVerifier;
-import net.yt.whale.net.util.RetrofitLog;
+import net.yt.lib.net.interceptor.TokenAddInterceptor;
+import net.yt.lib.net.interceptor.TokenErrorInterceptor;
+import net.yt.lib.net.util.RetrofitLog;
+import net.yt.lib.net.ssl.TrustAllCerts;
+import net.yt.lib.net.ssl.TrustAllHostnameVerifier;
 
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;

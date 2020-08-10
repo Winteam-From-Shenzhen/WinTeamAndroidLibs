@@ -1,4 +1,4 @@
-package net.yt.whale.net.ssl;
+package net.yt.lib.net.ssl;
 
 import android.annotation.SuppressLint;
 
