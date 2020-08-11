@@ -1,0 +1,10 @@
+apply  from: "../lib_common.gradle"
+
+dependencies {
+    implementation project(path: ':log')
+    implementation project(path: ':push')
+
+    api 'cn.jiguang.sdk:jpush:3.6.7'  // 极光推送
+    api 'cn.jiguang.sdk:jcore:2.3.8'  // 极光推送
+
+}

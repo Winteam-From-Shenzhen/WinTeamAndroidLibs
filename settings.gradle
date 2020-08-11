@@ -1,3 +1,5 @@
+include ':push'
+include ':push-jpush'
 include ':sdk'
 include ':serialport'
 include ':ota'
