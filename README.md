@@ -130,3 +130,9 @@
 
     DownLoadRequest downLoadRequest = new DownLoadRequest(fileUrl);
     downLoadRequest.startDownLoad(saveFullPath,callback);
+
+### 3、推送框架
+ 包括两个模块push和push-jpush，目前实现的是提供给上层的接口屏蔽了使用哪一家的推送，方便集成其他家的推送。
+ 集成其他家的推送比如小米，只需要增加一个模块比如push-xiaomi就可以了，推送框架会自动根据初始化选择哪一家加载那一家的推送。
+ 后期的优化，自动根据手机选择推送商，比如小米手机选择小米推送，或者直接集成友盟的多家推送就可以了。如果量大我们需要加入端内推送。
+ 目前接口只提供，初始化，设置清除别名，设置清除标签。请注意初始化后需要等大概5秒钟后设置别名和标签才能成功。

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PushActivity">
+
+    <Button
+        android:id="@+id/btn_set_alias"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="设置别名95527"/>
+
+    <Button
+        android:id="@+id/btn_clear_alias"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="取消别名"/>
+
+    <Button
+        android:id="@+id/btn_set_tags"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="设置标签"/>
+
+    <Button
+        android:id="@+id/btn_clear_tags"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="取消标签"/>
+
+</LinearLayout>

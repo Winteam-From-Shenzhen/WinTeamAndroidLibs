@@ -13,25 +13,12 @@ import net.yt.lib.sdk.core.AppHelper;
  */
 public class ToastUtils {
 
+    private static Handler sHandler = new Handler(Looper.getMainLooper());
+
     private ToastUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
-    private static Toast sToast;
-    private static Handler sHandler = new Handler(Looper.getMainLooper());
-    private static boolean isJumpWhenMore;
-
-    /**
-     * 吐司初始化
-     *
-     * @param isJumpWhenMore 当连续弹出吐司时，是要弹出新吐司还是只修改文本内容
-     *                       <p>{@code true}: 弹出新吐司<br>{@code false}: 只修改文本内容</p>
-     *                       <p>如果为{@code false}的话可用来做显示任意时长的吐司</p>
-     */
-    public static void init(boolean isJumpWhenMore) {
-        ToastUtils.isJumpWhenMore = isJumpWhenMore;
-    }
-
+    
     /**
      * 安全地显示短时吐司
      *
@@ -263,26 +250,7 @@ public class ToastUtils {
      * @param duration 显示时长
      */
     private static void showToast(CharSequence text, int duration) {
-        if (isJumpWhenMore) cancelToast();
-        if (sToast == null) {
-            sToast = Toast.makeText(AppHelper.I().getApp(), text, duration);
-            TextView tv = (TextView) sToast.getView().findViewById(android.R.id.message);
-            //tv.setTextSize(18);
-            //sToast.setGravity(Gravity.CENTER, 0, 0);
-        } else {
-            sToast.setText(text);
-            sToast.setDuration(duration);
-        }
-        sToast.show();
+        Toast.makeText(AppHelper.I().getApp(), text, duration).show();
     }
 
-    /**
-     * 取消吐司显示
-     */
-    public static void cancelToast() {
-        if (sToast != null) {
-            sToast.cancel();
-            sToast = null;
-        }
-    }
 }
