@@ -19,7 +19,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         testPermissions();
+
+
+        testLogin();
     }
+
+
 
     private void testPermissions() {
         boolean canReadStorage = PermissionCheck.hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -46,5 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         permissionRequest.requestPermissions();
+    }
+
+    private void testLogin() {
+
     }
 }
