@@ -34,13 +34,11 @@ public abstract class CommonCallback<T> implements Callback<T> {
                 RetrofitLog.d("onResponse : result = " + response.body());
 
                 if (response.body() instanceof BaseResult) {
-
-                    BaseResult baseResult = (BaseResult) response.body();
-                    RetrofitLog.d("onResponse : result = " + baseResult.toString());
-                    if (baseResult.getCode() == 0 || baseResult.getCode() == 200){
+                    int code = ((BaseResult)result).getCode();
+                    if ( code == 0 || code == 200){
                         runOnMain(() -> onSuccess(result));
                     }else {
-                        runOnMain(() -> onError(baseResult.getCode(), baseResult.getMsg()));
+                        runOnMain(() -> onError(code, ((BaseResult)result).getMessage()));
                     }
                 } else {
                     runOnMain(() -> onSuccess(result));

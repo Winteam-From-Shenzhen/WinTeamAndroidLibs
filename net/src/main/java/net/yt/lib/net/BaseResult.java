@@ -1,5 +1,7 @@
 package net.yt.lib.net;
 
+import androidx.annotation.NonNull;
+
 /**
  * Auth : xiao.yunfei
  * Date : 2020/7/21 19:50
@@ -8,7 +10,7 @@ package net.yt.lib.net;
  */
 public class BaseResult<T> {
     private int code;
-    private String msg;
+    private String message;
     private T data;
 
     public int getCode() {
@@ -19,12 +21,12 @@ public class BaseResult<T> {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
@@ -36,14 +38,12 @@ public class BaseResult<T> {
     }
 
 
-
-
-
+    @NonNull
     @Override
     public String toString() {
         return "BaseResult{" +
                 "code=" + code +
-                ", msg='" + msg + '\'' +
+                ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
     }
