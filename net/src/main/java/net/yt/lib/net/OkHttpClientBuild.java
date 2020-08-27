@@ -1,10 +1,10 @@
 package net.yt.lib.net;
 
+import net.yt.lib.log.L;
 import net.yt.lib.net.interceptor.TokenAddInterceptor;
 import net.yt.lib.net.interceptor.TokenErrorInterceptor;
 import net.yt.lib.net.ssl.TrustAllCerts;
 import net.yt.lib.net.ssl.TrustAllHostnameVerifier;
-import net.yt.lib.net.util.RetrofitLog;
 
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
@@ -79,7 +79,7 @@ class OkHttpClientBuild {
         builder.hostnameVerifier(new TrustAllHostnameVerifier());
 
         if (Config.isIsDebug()) {                 //设置网络日志拦截器
-            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> RetrofitLog.i("网络日志: " + message));
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> L.i("网络日志: " + message));
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(httpLoggingInterceptor);
         }
@@ -130,7 +130,7 @@ class OkHttpClientBuild {
 
         Builder needLog(boolean needLog) {
             if (needLog) {
-                HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> RetrofitLog.i("网络日志: " + message));
+                HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> L.i("网络日志: " + message));
                 httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 builder.addInterceptor(httpLoggingInterceptor);
             }

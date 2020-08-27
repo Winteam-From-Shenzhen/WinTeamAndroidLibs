@@ -1,8 +1,8 @@
 package net.yt.lib.net.callback;
 
+import net.yt.lib.log.L;
 import net.yt.lib.net.BaseResult;
 import net.yt.lib.net.util.NetExecutors;
-import net.yt.lib.net.util.RetrofitLog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,16 +22,16 @@ public abstract class CommonCallback<T> implements Callback<T> {
     @Override
     public void onResponse(@NotNull Call<T> call, final @NotNull Response<T> response) {
         try {
-            RetrofitLog.d("onResponse : " + response.toString());
+            L.d("onResponse : " + response.toString());
 
             if (response.code() == 200) {
                 final T result = response.body();
                 if (result == null) {
-                    RetrofitLog.e("CommonCallback : response.body is null");
+                    L.e("CommonCallback : response.body is null");
                     runOnMain(() -> onError(response.code(), response.message()));
                     return;
                 }
-                RetrofitLog.d("onResponse : result = " + response.body());
+                L.d("onResponse : result = " + response.body());
 
                 if (response.body() instanceof BaseResult) {
                     int code = ((BaseResult)result).getCode();
@@ -57,7 +57,7 @@ public abstract class CommonCallback<T> implements Callback<T> {
 
     @Override
     public void onFailure(@NotNull Call<T> call, @NotNull final Throwable t) {
-        RetrofitLog.e("onFailure : " + t.toString());
+        L.e("onFailure : " + t.toString());
         ExceptionHandle.ResponeThrowable responeThrowable = ExceptionHandle.handleException(t);
         runOnMain(() -> onError(responeThrowable.code, responeThrowable.message));
     }

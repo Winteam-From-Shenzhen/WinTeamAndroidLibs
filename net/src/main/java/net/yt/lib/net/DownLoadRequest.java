@@ -4,10 +4,10 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import net.yt.lib.log.L;
 import net.yt.lib.net.callback.DownLoadCallback;
 import net.yt.lib.net.interceptor.TokenAddInterceptor;
 import net.yt.lib.net.util.NetExecutors;
-import net.yt.lib.net.util.RetrofitLog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -123,7 +123,7 @@ public class DownLoadRequest extends BaseApi<DownLoadApi> {
         } else {
             baseUrl = "http://" + host;
         }
-        RetrofitLog.d("baseUrl : " + baseUrl);
+        L.d("baseUrl : " + baseUrl);
         return baseUrl;
     }
 
@@ -146,8 +146,8 @@ public class DownLoadRequest extends BaseApi<DownLoadApi> {
 
             @Override
             public void onFailure(@NotNull Call<ResponseBody> call, @NotNull Throwable t) {
-                RetrofitLog.e("onFailure call : " + call.toString());
-                RetrofitLog.e("t : " + t.toString());
+                L.e("onFailure call : " + call.toString());
+                L.e("t : " + t.toString());
                 //回调到主线程
                 NetExecutors.getInstance().mainThread().execute(downLoadCallback::onDownLoadError);
             }
@@ -163,7 +163,7 @@ public class DownLoadRequest extends BaseApi<DownLoadApi> {
      */
     private void onHttpResponse(Response<ResponseBody> response,
                                 final String targetFile, @NonNull final DownLoadCallback downLoadCallback) {
-        RetrofitLog.e("response : " + response.toString());
+        L.e("response : " + response.toString());
         if (!response.isSuccessful()) {
             //下载文件失败
             NetExecutors.getInstance().mainThread().execute(downLoadCallback::onDownLoadError);
@@ -224,7 +224,7 @@ public class DownLoadRequest extends BaseApi<DownLoadApi> {
                     //在主线程回调下载进度，可直接刷新 UI
                     NetExecutors.getInstance().mainThread().execute(() -> callBack.onDownLoading(fileSize, current, progress));
 
-                    RetrofitLog.i("file download ::" + fileSizeDownloaded + " ; fileSize :" + fileSize + " ; process :" + progress);
+                    L.i("file download ::" + fileSizeDownloaded + " ; fileSize :" + fileSize + " ; process :" + progress);
                 }
             }
 

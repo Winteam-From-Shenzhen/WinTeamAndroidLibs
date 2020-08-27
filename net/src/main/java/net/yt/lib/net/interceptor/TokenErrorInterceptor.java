@@ -1,6 +1,6 @@
 package net.yt.lib.net.interceptor;
 
-import net.yt.lib.net.util.RetrofitLog;
+import net.yt.lib.log.L;
 import net.yt.lib.net.ITokenHandler;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class TokenErrorInterceptor implements Interceptor {
         Response response = chain.proceed(request);
         int code = response.code();
         if (isTokenExpired(code)) {//根据和服务端的约定判断token过期
-            RetrofitLog.e("拦截到 token  已过期");
+            L.e("拦截到 token  已过期");
             if (iTokenHandler != null) {
                 iTokenHandler.onTokenError();
             }

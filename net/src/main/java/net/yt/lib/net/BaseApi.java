@@ -2,7 +2,7 @@ package net.yt.lib.net;
 
 import android.text.TextUtils;
 
-import net.yt.lib.net.util.RetrofitLog;
+import net.yt.lib.log.L;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -85,7 +85,7 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
 
         if (!TextUtils.equals(cacheToken, token)) {
             //token有更新
-            RetrofitLog.d("用户 token 有更新");
+            L.d("用户 token 有更新");
             cacheToken = token;
             OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(), cacheToken);
         }
