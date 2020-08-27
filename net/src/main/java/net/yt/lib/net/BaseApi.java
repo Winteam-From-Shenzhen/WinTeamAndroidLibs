@@ -2,8 +2,6 @@ package net.yt.lib.net;
 
 import android.text.TextUtils;
 
-import androidx.annotation.Nullable;
-
 import net.yt.lib.log.L;
 
 import java.lang.reflect.ParameterizedType;
@@ -54,7 +52,7 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
      * @param interceptors 拦截器
      * @return ApiImp
      */
-    public synchronized ApiImp getApiInterface(boolean enableHttps, boolean needLog, @Nullable Interceptor... interceptors) {
+    public synchronized ApiImp getApiInterface(boolean enableHttps, boolean needLog, Interceptor... interceptors) {
 
         OkHttpClientBuild.Builder builder = new OkHttpClientBuild.Builder();
         OkHttpClient.Builder okHttpClientBuilder = builder.enableHttps(enableHttps).needLog(needLog).setInterceptor(interceptors).builder();
