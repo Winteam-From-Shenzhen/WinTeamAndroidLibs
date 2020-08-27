@@ -138,6 +138,7 @@
  目前接口只提供，初始化，设置清除别名，设置清除标签。请注意初始化后需要等大概5秒钟后设置别名和标签才能成功。
          注意，需要在壳组件中添加极光的key，否则编译不过
          //极光推送key配对
+
          manifestPlaceholders = [
                  JPUSH_PKGNAME : applicationId,
                  JPUSH_APPKEY : "02b67259a7dc35d57bb54a21", //JPush 上注册的包名对应的 Appkey.
