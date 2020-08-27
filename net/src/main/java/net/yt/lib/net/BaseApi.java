@@ -55,12 +55,13 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
     public synchronized ApiImp getApiInterface(boolean enableHttps, boolean needLog, Interceptor... interceptors) {
 
         OkHttpClientBuild.Builder builder = new OkHttpClientBuild.Builder();
-        OkHttpClient.Builder builder1 = builder.enableHttps(enableHttps).needLog(needLog).setInterceptor(interceptors).builder();
+        OkHttpClient.Builder okHttpClientBuilder = builder.enableHttps(enableHttps).needLog(needLog).setInterceptor(interceptors).builder();
+
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .client(getOkHttpClient())
+                .client(okHttpClientBuilder.build())
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create());
-        retrofitBuilder.client(builder1.build());
+
         Class<ApiImp> apiImpClass = getApiImp(this);
         if (apiImpClass == null) {
             throw new NullPointerException("apiImpClass is null");
