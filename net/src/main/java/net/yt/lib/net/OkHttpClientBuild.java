@@ -2,9 +2,9 @@ package net.yt.lib.net;
 
 import net.yt.lib.net.interceptor.TokenAddInterceptor;
 import net.yt.lib.net.interceptor.TokenErrorInterceptor;
-import net.yt.lib.net.util.RetrofitLog;
 import net.yt.lib.net.ssl.TrustAllCerts;
 import net.yt.lib.net.ssl.TrustAllHostnameVerifier;
+import net.yt.lib.net.util.RetrofitLog;
 
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +13,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -47,7 +48,7 @@ class OkHttpClientBuild {
      * @param token token
      */
     public static void updateTokenAddInterceptor(String key, String token) {
-        getTokenInterceptor(key,token);
+        getTokenInterceptor(key, token);
     }
 
 
@@ -59,7 +60,7 @@ class OkHttpClientBuild {
      */
     public static OkHttpClient build(String token, ITokenHandler tokenHandler) {
         OkHttpClient.Builder builder = getDefaultBuild();
-        builder.addInterceptor(getTokenInterceptor("",token));         //设置 Token拦截器, 添加 token 使用
+        builder.addInterceptor(getTokenInterceptor("", token));         //设置 Token拦截器, 添加 token 使用
         builder.addInterceptor(new TokenErrorInterceptor(tokenHandler)); //设置 返回 Token失效 拦截器
         return builder.build();
     }
@@ -73,14 +74,21 @@ class OkHttpClientBuild {
      */
     private static OkHttpClient.Builder getDefaultBuild() {
         OkHttpClient.Builder builder = getBaseBuild();
+
         builder.sslSocketFactory(createSSLSocketFactory(), new TrustAllCerts());
         builder.hostnameVerifier(new TrustAllHostnameVerifier());
+
+        if (Config.isIsDebug()) {                 //设置网络日志拦截器
+            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> RetrofitLog.i("网络日志: " + message));
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(httpLoggingInterceptor);
+        }
 
         return builder;
     }
 
     /**
-     * 基础 OkHttpClient.Builder , 只设置超时和 日志拦截
+     * 基础 OkHttpClient.Builder , 只设置超时
      *
      * @return OkHttpClient.Builder
      */
@@ -91,11 +99,6 @@ class OkHttpClientBuild {
         builder.readTimeout(Config.getReadTime(), TimeUnit.SECONDS);       //读取超时
         builder.writeTimeout(Config.getWriteTime(), TimeUnit.SECONDS);     //写入超时
 
-        if (Config.isIsDebug()) {                 //设置网络日志拦截器
-            HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> RetrofitLog.i("网络日志: " + message));
-            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(httpLoggingInterceptor);
-        }
         return builder;
     }
 
@@ -116,5 +119,41 @@ class OkHttpClientBuild {
             e.printStackTrace();
         }
         return ssfFactory;
+    }
+
+    public static class Builder {
+        private OkHttpClient.Builder builder;
+
+        Builder() {
+            builder = getBaseBuild();
+        }
+
+        Builder needLog(boolean needLog) {
+            if (needLog) {
+                HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> RetrofitLog.i("网络日志: " + message));
+                httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                builder.addInterceptor(httpLoggingInterceptor);
+            }
+            return this;
+        }
+
+        Builder enableHttps(boolean enable) {
+            if (enable) {
+                builder.sslSocketFactory(createSSLSocketFactory(), new TrustAllCerts());
+                builder.hostnameVerifier(new TrustAllHostnameVerifier());
+            }
+            return this;
+        }
+
+        Builder setInterceptor(Interceptor... interceptors) {
+            for (Interceptor interceptor : interceptors) {
+                builder.addInterceptor(interceptor);
+            }
+            return this;
+        }
+
+        OkHttpClient.Builder builder() {
+            return builder;
+        }
     }
 }

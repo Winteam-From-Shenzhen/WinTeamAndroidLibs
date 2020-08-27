@@ -7,6 +7,7 @@ import net.yt.lib.net.util.RetrofitLog;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,10 +30,13 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
     private String cacheToken = "";
     private Retrofit.Builder retrofitBuilder;
 
+    private String baseUrl;
+
     public BaseApi(String baseUrl) {
         //获取 baseUrl ,如果 此处获取的baseUrl 为空 ,
         // 则认为 子类需要自己创建 retrofitBuilder 对象
         if (!TextUtils.isEmpty(baseUrl)) {
+            this.baseUrl = baseUrl;
             retrofitBuilder = new Retrofit.Builder()
                     .client(getOkHttpClient())
                     .baseUrl(baseUrl)
@@ -40,6 +44,29 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
         }
     }
 
+    /**
+     * 自定义 retrofitBuilder
+     *
+     * @param enableHttps  是否启用 Https
+     * @param needLog      是否开启 日志
+     * @param interceptors 拦截器
+     * @return ApiImp
+     */
+    public synchronized ApiImp getApiInterface(boolean enableHttps, boolean needLog, Interceptor... interceptors) {
+
+        OkHttpClientBuild.Builder builder = new OkHttpClientBuild.Builder();
+        OkHttpClient.Builder builder1 = builder.enableHttps(enableHttps).needLog(needLog).setInterceptor(interceptors).builder();
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .client(getOkHttpClient())
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create());
+        retrofitBuilder.client(builder1.build());
+        Class<ApiImp> apiImpClass = getApiImp(this);
+        if (apiImpClass == null) {
+            throw new NullPointerException("apiImpClass is null");
+        }
+        return retrofitBuilder.build().create(apiImpClass);
+    }
 
     /**
      * 获取  ApiImp 实例
@@ -52,14 +79,14 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
             // retrofitBuilder 必须存在，否则 抛异常
             throw new NullPointerException("retrofitBuilder is null");
         }
-
+        retrofitBuilder.client(getOkHttpClient());
         String token = getToken();
 
         if (!TextUtils.equals(cacheToken, token)) {
             //token有更新
             RetrofitLog.d("用户 token 有更新");
             cacheToken = token;
-            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(), token);
+            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(), cacheToken);
         }
         if (mRetrofit == null) {
             mRetrofit = retrofitBuilder.build();
@@ -115,4 +142,6 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
     public void onTokenError() {
 
     }
+
+
 }
