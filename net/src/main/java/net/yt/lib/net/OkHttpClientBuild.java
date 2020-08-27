@@ -1,5 +1,7 @@
 package net.yt.lib.net;
 
+import androidx.annotation.Nullable;
+
 import net.yt.lib.log.L;
 import net.yt.lib.net.interceptor.TokenAddInterceptor;
 import net.yt.lib.net.interceptor.TokenErrorInterceptor;
@@ -145,7 +147,10 @@ class OkHttpClientBuild {
             return this;
         }
 
-        Builder setInterceptor(Interceptor... interceptors) {
+        Builder setInterceptor(@Nullable Interceptor... interceptors) {
+            if (interceptors == null){
+                return this;
+            }
             for (Interceptor interceptor : interceptors) {
                 builder.addInterceptor(interceptor);
             }
