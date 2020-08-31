@@ -1,8 +1,6 @@
 package net.yt.lib.net;
 
 import net.yt.lib.log.L;
-import net.yt.lib.net.interceptor.TokenAddInterceptor;
-import net.yt.lib.net.interceptor.TokenErrorInterceptor;
 import net.yt.lib.net.ssl.TrustAllCerts;
 import net.yt.lib.net.ssl.TrustAllHostnameVerifier;
 
@@ -23,48 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Package name : net.yt.whale.net
  * Des : 创建 OkHttpClient
  */
-class OkHttpClientBuild {
-
-
-    private static TokenAddInterceptor tokenAddInterceptor;
-
-    /**
-     * 获取 TokenAddInterceptor
-     *
-     * @param token token
-     * @return TokenAddInterceptor
-     */
-    private static TokenAddInterceptor getTokenInterceptor(String key, String token) {
-        if (tokenAddInterceptor == null) {
-            tokenAddInterceptor = new TokenAddInterceptor(token);
-        }
-        tokenAddInterceptor.updateToken(key, token);
-        return tokenAddInterceptor;
-    }
-
-    /**
-     * 更新 TokenAddInterceptor 的中的 token
-     *
-     * @param token token
-     */
-    public static void updateTokenAddInterceptor(String key, String token) {
-        getTokenInterceptor(key, token);
-    }
-
-
-    /**
-     * 创建  OkHttpClient ，根据token 是否为空，决定是否添加 token 拦截
-     *
-     * @param token token
-     * @return OkHttpClient
-     */
-    public static OkHttpClient build(String token, ITokenHandler tokenHandler) {
-        OkHttpClient.Builder builder = getDefaultBuild();
-        builder.addInterceptor(getTokenInterceptor("", token));         //设置 Token拦截器, 添加 token 使用
-        builder.addInterceptor(new TokenErrorInterceptor(tokenHandler)); //设置 返回 Token失效 拦截器
-        return builder.build();
-    }
-
+public class OkHttpClientBuild {
 
     /**
      * 基本网络请求。 添加 HTTPS 认证。
@@ -72,7 +29,7 @@ class OkHttpClientBuild {
      *
      * @return OkHttpClient.Builder
      */
-    private static OkHttpClient.Builder getDefaultBuild() {
+    public static OkHttpClient.Builder getDefaultBuild() {
         OkHttpClient.Builder builder = getBaseBuild();
 
         builder.sslSocketFactory(createSSLSocketFactory(), new TrustAllCerts());

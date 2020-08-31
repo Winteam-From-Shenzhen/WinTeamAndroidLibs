@@ -3,6 +3,8 @@ package net.yt.lib.net;
 import android.text.TextUtils;
 
 import net.yt.lib.log.L;
+import net.yt.lib.net.interceptor.TokenAddInterceptor;
+import net.yt.lib.net.interceptor.TokenErrorInterceptor;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -31,17 +33,10 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
     private Retrofit.Builder retrofitBuilder;
 
     private String baseUrl;
+    private TokenAddInterceptor tokenAddInterceptor;
 
     public BaseApi(String baseUrl) {
-        //获取 baseUrl ,如果 此处获取的baseUrl 为空 ,
-        // 则认为 子类需要自己创建 retrofitBuilder 对象
-        if (!TextUtils.isEmpty(baseUrl)) {
-            this.baseUrl = baseUrl;
-            retrofitBuilder = new Retrofit.Builder()
-                    .client(getOkHttpClient())
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create());
-        }
+        this.baseUrl = baseUrl;
     }
 
     /**
@@ -76,18 +71,22 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
      */
     public synchronized ApiImp getApiInterface() {
 
-        if (retrofitBuilder == null) {
-            // retrofitBuilder 必须存在，否则 抛异常
-            throw new NullPointerException("retrofitBuilder is null");
+        if (TextUtils.isEmpty(baseUrl) || !baseUrl.toLowerCase().startsWith("http")){
+            throw new IllegalArgumentException("baseUrl is null  or  baseUrl is not http&https");
         }
-        retrofitBuilder.client(getOkHttpClient());
+        if (retrofitBuilder == null) {
+            retrofitBuilder = new Retrofit.Builder()
+                    .client(getOkHttpClient())
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create());
+        }
         String token = getToken();
 
         if (!TextUtils.equals(cacheToken, token)) {
             //token有更新
             L.d("用户 token 有更新");
             cacheToken = token;
-            OkHttpClientBuild.updateTokenAddInterceptor(getTokenKey(), cacheToken);
+            updateTokenAddInterceptor(getTokenKey(), cacheToken);
         }
         if (mRetrofit == null) {
             mRetrofit = retrofitBuilder.build();
@@ -103,17 +102,40 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
         return apiInterface;
     }
 
-
     /**
      * 获取 OkHttpClient,
      * 使用者 如需要自己实现，直接重写此方法
      *
      * @return OkHttpClient
      */
-    public OkHttpClient getOkHttpClient() {
-        return OkHttpClientBuild.build(cacheToken, this);
+    private OkHttpClient getOkHttpClient() {
+        OkHttpClient.Builder defaultBuild = OkHttpClientBuild.getDefaultBuild();
+        defaultBuild.addInterceptor(getTokenInterceptor("", cacheToken));         //设置 Token拦截器, 添加 token 使用
+        defaultBuild.addInterceptor(new TokenErrorInterceptor(this)); //设置 返回 Token失效 拦截器
+        return defaultBuild.build();
+    }
+    /**
+     * 获取 TokenAddInterceptor
+     *
+     * @param token token
+     * @return TokenAddInterceptor
+     */
+    private TokenAddInterceptor getTokenInterceptor(String key, String token) {
+        if (tokenAddInterceptor == null) {
+            tokenAddInterceptor = new TokenAddInterceptor(token);
+        }
+        tokenAddInterceptor.updateToken(key, token);
+        return tokenAddInterceptor;
     }
 
+    /**
+     * 更新 TokenAddInterceptor 的中的 token
+     *
+     * @param token token
+     */
+    private void updateTokenAddInterceptor(String key, String token) {
+        getTokenInterceptor(key, token);
+    }
     /**
      * 返回 ApiImp.class
      *
@@ -143,6 +165,5 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
     public void onTokenError() {
 
     }
-
 
 }
