@@ -108,7 +108,7 @@ public abstract class BaseApi<ApiImp> implements ITokenHandler {
      *
      * @return OkHttpClient
      */
-    private OkHttpClient getOkHttpClient() {
+    public OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder defaultBuild = OkHttpClientBuild.getDefaultBuild();
         defaultBuild.addInterceptor(getTokenInterceptor("", cacheToken));         //设置 Token拦截器, 添加 token 使用
         defaultBuild.addInterceptor(new TokenErrorInterceptor(this)); //设置 返回 Token失效 拦截器
