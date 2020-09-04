@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/ly_title"
+        layout="@layout/layout_all_title" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsl_all_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_0D" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_curr_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="当前连接网络"
+                android:textSize="16sp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingStart="30dp"
+                android:background="@color/color_18"
+                android:textColor="#ffffffff"
+                tools:ignore="RtlSymmetry" />
+            <include
+                android:id="@+id/ly_curr_wifi"
+                layout="@layout/item_wifi_list2" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_18"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="选择连接网络"
+                    android:textSize="16sp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingStart="30dp"
+                    android:textColor="#FFFFFF"
+                    tools:ignore="RtlSymmetry" />
+                <ProgressBar
+                    android:id="@+id/pb_update_wifi"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_update_wifi"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="#17B5FE"/>
+                    tools:ignore="RtlSymmetry"/>
+                <TextView
+                    android:id="@id/tv_update_wifi"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:textColor="#17B5FE"
+                    android:textSize="16sp"
+                    android:text="刷新"
+                    tools:ignore="RtlSymmetry" />
+            </RelativeLayout>
+            <net.yt.libs.test.wifi.MyListView
+                android:id="@+id/list_wifi_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#262626"
+                android:dividerHeight="1px"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

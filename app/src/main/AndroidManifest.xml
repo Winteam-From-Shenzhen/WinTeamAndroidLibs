@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".PushActivity"></activity>
+        <activity android:name=".wifi.WifiPasswordEditActivity" />
+        <activity android:name=".wifi.WifiInfoActivity" />
+        <activity android:name=".wifi.WifiCurrInfoActivity" />
+        <activity android:name=".wifi.WifiSettingActivity" />
+        <activity android:name=".PushActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

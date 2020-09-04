@@ -1,3 +1,4 @@
+include ':wifi'
 include ':push'
 include ':push-jpush'
 include ':sdk'

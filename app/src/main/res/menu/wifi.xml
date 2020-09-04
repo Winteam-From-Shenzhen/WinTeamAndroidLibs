@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/connect"
+        android:icon="@mipmap/ic_launcher"
+        android:title="连接网络"/>
+
+    <item
+        android:id="@+id/cancel"
+        android:icon="@mipmap/ic_launcher"
+        android:title="取消保存"/>
+
+    <item
+        android:id="@+id/ignore"
+        android:icon="@mipmap/ic_launcher"
+        android:title="忽略网络"/>
+
+</menu>

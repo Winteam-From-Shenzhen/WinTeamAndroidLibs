@@ -12,6 +12,7 @@ import net.yt.lib.push.Push;
 import net.yt.lib.push.Target;
 import net.yt.lib.sdk.base.BaseApplication;
 import net.yt.lib.sdk.utils.ToastUtils;
+import net.yt.lib.wifi.WifiTool;
 
 public class App extends BaseApplication {
 
@@ -56,6 +57,8 @@ public class App extends BaseApplication {
                 });
             }
         });
+
+        WifiTool.I().init(this);
 
         /*
         mHandler.postDelayed(new Runnable() {

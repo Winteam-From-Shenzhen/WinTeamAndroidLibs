@@ -1,0 +1,84 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <LinearLayout
+            android:id="@+id/ly_curwifi"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="当前连接网络"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/wifi_info"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:hint="wifi name"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择连接网络"
+                android:textColor="@android:color/black" />
+            <Button
+                android:id="@+id/btn_flesh"
+                android:layout_width="60dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="100dp"
+                android:text="刷新" />
+            <ProgressBar
+                android:id="@+id/pgb_flesh"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list_wifi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"></ListView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/pgb_connect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#aaaa"
+        android:focusableInTouchMode="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</FrameLayout>
