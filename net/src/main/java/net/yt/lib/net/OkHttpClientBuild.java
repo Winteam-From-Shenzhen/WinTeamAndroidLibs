@@ -4,6 +4,7 @@ import net.yt.lib.log.L;
 import net.yt.lib.net.ssl.TrustAllCerts;
 import net.yt.lib.net.ssl.TrustAllHostnameVerifier;
 
+import java.net.Proxy;
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -55,6 +56,7 @@ public class OkHttpClientBuild {
         builder.connectTimeout(Config.getConnectTime(), TimeUnit.SECONDS); //连接超时
         builder.readTimeout(Config.getReadTime(), TimeUnit.SECONDS);       //读取超时
         builder.writeTimeout(Config.getWriteTime(), TimeUnit.SECONDS);     //写入超时
+        builder.proxy(Proxy.NO_PROXY);// 不使用系统代码，防止抓包工具抓包
 
         return builder;
     }
