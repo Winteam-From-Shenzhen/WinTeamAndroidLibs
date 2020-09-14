@@ -79,13 +79,13 @@ class WifiListAdapter extends BaseAdapter {
             holder.levelIv.setImageResource(R.mipmap.icon_wifi_level_4);
         }
         holder.nameTv.setText(sr.SSID);
-        if(sr.SSID.equals(mConnectingSSID)) {
+        if(WifiBean.State.CONNECTING == sr.state) {
             holder.stateTv.setVisibility(View.VISIBLE);
             holder.stateTv.setText("连接中");
-        }else if(WifiTool.I().isSsidSaved(sr.SSID) == WifiTool.SSID_STATE.SSID_STATE_EXIST_BUT_DISCONNECTED){
+        }else if(WifiBean.State.SAVE_DISABLE == sr.state){
             holder.stateTv.setVisibility(View.VISIBLE);
             holder.stateTv.setText("已断开");
-        }else if(WifiTool.I().isSsidSaved(sr.SSID) == WifiTool.SSID_STATE.SSID_STATE_EXIST_AND_CONNECTED){
+        }else if(WifiBean.State.SAVE_ENABLE == sr.state){
             holder.stateTv.setVisibility(View.VISIBLE);
             holder.stateTv.setText("已保存");
         }else{

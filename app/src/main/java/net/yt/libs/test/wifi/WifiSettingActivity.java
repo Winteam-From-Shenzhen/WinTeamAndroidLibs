@@ -20,6 +20,7 @@ import androidx.core.widget.NestedScrollView;
 
 import net.yt.lib.sdk.base.BaseActivity;
 import net.yt.lib.sdk.utils.ToastUtils;
+import net.yt.lib.wifi.ActWifi;
 import net.yt.lib.wifi.Constant;
 import net.yt.lib.wifi.IConnectCallback;
 import net.yt.lib.wifi.IScanCallback;
@@ -116,7 +117,7 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
 
         WifiTool.I().setConnectStateCallback(new WifiTool.IConnectStateCallback() {
             @Override
-            public void onChange(boolean connected) {
+            public void onChange() {
                 updateUI();
             }
         });
@@ -220,11 +221,11 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
                 break;
 
             case R.id.ly_curr_wifi:
-                WifiInfo currWifi = WifiTool.I().getConnectedWifi();
+                ActWifi currWifi = WifiTool.I().getConnectedWifi();
                 if(currWifi != null) {
                     Intent intent = new Intent(WifiSettingActivity.this, WifiCurrInfoActivity.class);
-                    intent.putExtra("SSID", Utils.removeDoubleQuotes(currWifi.getSSID()));
-                    intent.putExtra("IP", WifiTool.intToIp(currWifi.getIpAddress()));
+                    intent.putExtra("SSID", currWifi.SSID);
+                    intent.putExtra("IP", WifiTool.I().getCurrIP());
                     intent.putExtra("MAC", WifiTool.I().getCurrMac());
                     intent.putExtra("GATEWAY", WifiTool.I().getCurrGateway());
                     intent.putExtra("MARK", WifiTool.getCurrIpAddrMask());
@@ -254,12 +255,12 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void updateUI(){
-        WifiInfo currWifi = WifiTool.I().getConnectedWifi();
+        ActWifi currWifi = WifiTool.I().getConnectedWifi();
         String currSSID = null;
         if(currWifi != null){
             mCurrWifiTip.setVisibility(View.VISIBLE);
             mCurrWifiLy.setVisibility(View.VISIBLE);
-            int rssiLevel = WifiTool.formatRssi(currWifi.getRssi());
+            int rssiLevel = currWifi.level;
             if(0 == rssiLevel) {
                 mCurrwifiLevel.setImageResource(R.mipmap.icon_wifi_level_1);
             }else if(1 == rssiLevel) {
@@ -271,7 +272,7 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
             }else if(4 == rssiLevel) {
                 mCurrwifiLevel.setImageResource(R.mipmap.icon_wifi_level_4);
             }
-            currSSID = Utils.removeDoubleQuotes(currWifi.getSSID());
+            currSSID = currWifi.SSID;
             mCurrwifiName.setText(currSSID);
             mCurrwifiState.setVisibility(View.VISIBLE);
             mCurrwifiState.setText("已连接");
@@ -284,27 +285,48 @@ public class WifiSettingActivity extends BaseActivity implements View.OnClickLis
 
         List<WifiBean> scanlist = new ArrayList<WifiBean>();
         scanlist.clear();
+        List<WifiBean> noSaveScanlist = new ArrayList<WifiBean>();
+        List<WifiBean> saveScanlist = new ArrayList<WifiBean>();
         WifiBean connectingBean = null;
         for(WifiBean bean : WifiTool.I().getLastScanResult()){
-            //把连接中的剔除出去
+            //把已连接的剔除出去
             if(!TextUtils.isEmpty(currSSID)
                     && !TextUtils.isEmpty(bean.SSID)
                     && bean.SSID.equals(currSSID)){
                 continue;
             }
 
-            //把连接中的提到前面来
+            //处理连接中
             if(!TextUtils.isEmpty(bean.SSID)
-                    && !TextUtils.isEmpty(mConnectingSSID)
-                    && bean.SSID.equals(mConnectingSSID)){
-                connectingBean = bean;
+                    && !TextUtils.isEmpty(WifiTool.I().getConnnectingSSID())
+                    && bean.SSID.equals(WifiTool.I().getConnnectingSSID())){
+                bean.state = WifiBean.State.CONNECTING;
+                connectingBean = bean.copy();
                 continue;
             }
-            scanlist.add(bean.copy());
+
+            //处理其他状态
+            if(WifiTool.I().isSsidSaved(bean.SSID) == WifiTool.SSID_STATE.SSID_STATE_EXIST_BUT_DISCONNECTED){
+                bean.state = WifiBean.State.SAVE_DISABLE;
+                saveScanlist.add(bean.copy());
+            }else if(WifiTool.I().isSsidSaved(bean.SSID) == WifiTool.SSID_STATE.SSID_STATE_EXIST_AND_CONNECTED){
+                bean.state = WifiBean.State.SAVE_ENABLE;
+                saveScanlist.add(bean.copy());
+            }else{
+                bean.state = WifiBean.State.NONE;
+                noSaveScanlist.add(bean.copy());
+            }
         }
+
+        //先加未保存再加已保存
+        scanlist.addAll(saveScanlist);
+        scanlist.addAll(noSaveScanlist);
+
+        //把连接中放第一个
         if(null != connectingBean) {
             scanlist.add(0, connectingBean);
         }
+        
         net.yt.lib.log.L.e("%%%%%%%%%%%%% updateui size = " + scanlist.size());
         mWifiListAdapter.updateData(scanlist);
     }
