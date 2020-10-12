@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 #设置生成的so动态库最后输出的路径)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${CMAKE_ANDROID_ARCH_ABI})
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${CMAKE_ANDROID_ARCH_ABI})
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
