@@ -8,19 +8,19 @@
 extern "C" {
 #endif
 /*
- * Class:     com_ytzn_serialport_SerialPort
+ * Class:     net_yt_serialport_SerialPort
  * Method:    open
  * Signature: (Ljava/lang/String;II)Ljava/io/FileDescriptor;
  */
-JNIEXPORT jobject JNICALL Java_com_ytzn_serialport_SerialPort_open
+JNIEXPORT jobject JNICALL Java_net_yt_serialport_SerialPort_open
   (JNIEnv *, jclass, jstring, jint, jint);
 
 /*
- * Class:    com_ytzn_serialport_SerialPort
+ * Class:    net_yt_serialport_SerialPort
  * Method:    close
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_ytzn_serialport_SerialPort_close
+JNIEXPORT void JNICALL Java_net_yt_serialport_SerialPort_close
   (JNIEnv *, jclass);
 
 #ifdef __cplusplus

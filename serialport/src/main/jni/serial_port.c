@@ -51,7 +51,7 @@ static speed_t getBaudrate(jint baudrate)
     }
 }
 
-JNIEXPORT jobject JNICALL Java_com_ytzn_serialport_SerialPort_open
+JNIEXPORT jobject JNICALL Java_net_yt_serialport_SerialPort_open
   (JNIEnv *env, jclass thiz, jstring path, jint baudrate, jint flags) {
     int fd;
     speed_t speed;
@@ -117,7 +117,7 @@ JNIEXPORT jobject JNICALL Java_com_ytzn_serialport_SerialPort_open
     return mFileDescriptor;
 }
 
-JNIEXPORT void JNICALL Java_com_ytzn_serialport_SerialPort_close
+JNIEXPORT void JNICALL Java_net_yt_serialport_SerialPort_close
   (JNIEnv *env, jclass thiz) {
     jclass SerialPortClass = (*env)->GetObjectClass(env, thiz);
     jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
