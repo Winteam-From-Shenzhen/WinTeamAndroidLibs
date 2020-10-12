@@ -55,7 +55,7 @@ dependencies {
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:log:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:ota:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:sdk:$libVersion"
-    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
+//    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:memorymonitor:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push-jpush:$libVersion"
