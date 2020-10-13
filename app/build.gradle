@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
 
     defaultConfig {
         applicationId "net.yt.libs.test"
@@ -39,16 +39,15 @@ android {
 }
 
 ext{
-    libVersion = "0.1.0"
+    libVersion = "0.1.1"
 }
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    implementation (project(path: ':wifi')){
-        exclude module :"log"
-    }
-//    implementation project(path: ':net')
+//    implementation (project(path: ':wifi')){
+//        exclude module :"log"
+//    }
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -60,9 +59,10 @@ dependencies {
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:permissions:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:net:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:log:$libVersion"
-//    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:ota:$libVersion"
+    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:ota:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:sdk:$libVersion"
-////    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
+    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:wifi:$libVersion"
+    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:memorymonitor:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push-jpush:$libVersion"
