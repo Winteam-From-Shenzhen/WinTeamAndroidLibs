@@ -4,14 +4,11 @@ import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
 
-import net.yt.lib.log.L;
-import net.yt.lib.push.IOperateCallback;
 import net.yt.lib.push.IPushReceiver;
 import net.yt.lib.push.Message;
 import net.yt.lib.push.Push;
 import net.yt.lib.push.Target;
 import net.yt.lib.sdk.base.BaseApplication;
-import net.yt.lib.sdk.utils.ToastUtils;
 import net.yt.lib.wifi.WifiTool;
 
 public class App extends BaseApplication {

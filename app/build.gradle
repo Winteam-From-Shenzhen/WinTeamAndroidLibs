@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "net.yt.libs.test"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -32,30 +32,37 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/gfprobe-provider.xml'
+        exclude 'META-INF/mailcap'
+    }
 }
 
 ext{
-    libVersion = "0.0.7"
+    libVersion = "0.1.0"
 }
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation project(path: ':net')
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation (project(path: ':wifi')){
+        exclude module :"log"
+    }
+//    implementation project(path: ':net')
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //全部依赖
 //    implementation "com.github.Winteam-From-Shenzhen:WinTeamAndroidLibs:$libVersion"
 
-    //单独依赖
+//    //单独依赖
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:permissions:$libVersion"
-//    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:net:$libVersion"
+    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:net:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:log:$libVersion"
-    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:ota:$libVersion"
+//    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:ota:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:sdk:$libVersion"
-//    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
+////    implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:serialport:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:memorymonitor:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push:$libVersion"
     implementation "com.github.Winteam-From-Shenzhen.WinTeamAndroidLibs:push-jpush:$libVersion"

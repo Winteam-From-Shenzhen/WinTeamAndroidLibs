@@ -1,3 +1,0 @@
-group='com.github.Winteam-From-Shenzhen'
-configurations.maybeCreate("default")
-artifacts.add("default", file('serialport-release.aar'))

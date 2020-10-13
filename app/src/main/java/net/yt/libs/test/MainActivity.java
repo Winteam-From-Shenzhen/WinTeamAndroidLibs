@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity {
 //                    Intent intent = new Intent(MainActivity.this, PushActivity.class);
 //                    startActivity(intent);
 
-//                    ToastUtils.showLongToast("µã»÷ÁË " + sCount++ + " ´Î");
+//                    ToastUtils.showLongToast("ç‚¹å‡»äº† " + sCount++ + " æ¬¡");
 
                     //Intent wifiSettingsIntent = new Intent("android.settings.WIFI_SETTINGS");
                     //startActivity(wifiSettingsIntent);
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home://Ôö¼Óµã»÷ÊÂ¼þ
+            case android.R.id.home://å¢žåŠ ç‚¹å‡»äº‹ä»¶
                 finish();
                 break;
             default:

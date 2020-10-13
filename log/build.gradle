@@ -1,5 +1,5 @@
 apply  from: "../lib_common.gradle"
-
+apply plugin: 'com.android.library'
 android {
 
     useLibrary'org.apache.http.legacy'
